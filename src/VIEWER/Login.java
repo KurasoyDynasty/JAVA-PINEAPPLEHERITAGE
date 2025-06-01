@@ -73,7 +73,7 @@ public class Login extends javax.swing.JFrame {
         Left.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 255, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 215, 0));
         jLabel1.setText("OGIN");
         Left.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 100, 60));
 
@@ -108,11 +108,11 @@ public class Login extends javax.swing.JFrame {
         Left.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 50, 50, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(204, 255, 0));
+        jLabel11.setForeground(new java.awt.Color(255, 215, 0));
         jLabel11.setText("DMIN  ");
         Left.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 60));
 
-        LoginBtn.setBackground(new java.awt.Color(204, 255, 0));
+        LoginBtn.setBackground(new java.awt.Color(255, 215, 0));
         LoginBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LoginBtn.setText("LOGIN");
         LoginBtn.addActionListener(new java.awt.event.ActionListener() {

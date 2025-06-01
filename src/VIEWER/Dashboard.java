@@ -6,6 +6,7 @@ package VIEWER;
  */
 
 import MODEL.my_methods;
+import javax.swing.JOptionPane;
 public class Dashboard extends javax.swing.JFrame {
     my_methods methods = new my_methods();
 
@@ -72,7 +73,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        dashboard = new javax.swing.JLabel();
         manage_customers = new javax.swing.JLabel();
         manage_hotel = new javax.swing.JLabel();
         manage_rooms = new javax.swing.JLabel();
@@ -182,10 +183,15 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 0));
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 50)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(112, 126, 199));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dashboard.png"))); // NOI18N
-        jLabel11.setText("DASHBOARD");
+        dashboard.setFont(new java.awt.Font("Times New Roman", 1, 50)); // NOI18N
+        dashboard.setForeground(new java.awt.Color(112, 126, 199));
+        dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dashboard.png"))); // NOI18N
+        dashboard.setText("DASHBOARD");
+        dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -193,14 +199,14 @@ public class Dashboard extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(jLabel11)
+                .addComponent(dashboard)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
+                .addComponent(dashboard)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -428,6 +434,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
         jLabel18.setText("Logout");
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 40, 145, 42));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 1410, 120));
@@ -545,6 +556,7 @@ public class Dashboard extends javax.swing.JFrame {
         Customer customerForm = new Customer();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_customersMouseClicked
 
     private void manage_customersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_customersMouseEntered
@@ -569,9 +581,10 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void manage_hotelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_hotelMouseClicked
-        Customer customerForm = new Customer();
+        Hotel customerForm = new Hotel();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_hotelMouseClicked
 
     private void manage_hotelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_hotelMouseEntered
@@ -584,9 +597,10 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_hotelMouseExited
 
     private void manage_roomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_roomsMouseClicked
-        Customer customerForm = new Customer();
+        Room customerForm = new Room();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_roomsMouseClicked
 
     private void manage_roomsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_roomsMouseEntered
@@ -599,9 +613,10 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_roomsMouseExited
 
     private void manage_reservationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_reservationsMouseClicked
-        Customer customerForm = new Customer();
+        Add_Reservations customerForm = new Add_Reservations();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_reservationsMouseClicked
 
     private void manage_reservationsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_reservationsMouseEntered
@@ -614,7 +629,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_reservationsMouseExited
 
     private void manage_paymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_paymentsMouseClicked
-        Customer customerForm = new Customer();
+        Payment customerForm = new Payment();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
     }//GEN-LAST:event_manage_paymentsMouseClicked
@@ -629,7 +644,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_paymentsMouseExited
 
     private void staffsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffsMouseClicked
-        Customer customerForm = new Customer();
+        Staffs customerForm = new Staffs();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
     }//GEN-LAST:event_staffsMouseClicked
@@ -642,6 +657,27 @@ public class Dashboard extends javax.swing.JFrame {
     private void staffsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffsMouseExited
         staffs.setBackground(new java.awt.Color(192, 255, 0));
     }//GEN-LAST:event_staffsMouseExited
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, 
+        "Are you sure you want to logout?", 
+        "Logout Confirmation", 
+        JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        Login login = new Login();
+        login.setVisible(true);
+        login.setLocationRelativeTo(this);
+        this.dispose();
+    }
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
+        Dashboard customerForm = new Dashboard();
+        customerForm.setVisible(true);
+        customerForm.setLocationRelativeTo(this);
+        this.dispose();
+    }//GEN-LAST:event_dashboardMouseClicked
 
     /**
      * @param args the command line arguments
@@ -680,9 +716,9 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel checked_in;
+    private javax.swing.JLabel dashboard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;

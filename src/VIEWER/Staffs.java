@@ -20,7 +20,7 @@ public class Staffs extends javax.swing.JFrame {
     public Staffs() {
         initComponents();
         setLocationRelativeTo(null);
-        b.DisplayTable(jTable1, "SELECT * FROM tbl_staff");
+        b.DisplayTable(jTable1, "SELECT staff_id, full_name, role, email FROM tbl_staff");
     }
     
     my_methods b = new my_methods();
@@ -55,24 +55,24 @@ public class Staffs extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         staffname_txt = new javax.swing.JTextField();
         jPanel21 = new javax.swing.JPanel();
-        jLabel49 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        dashboard = new javax.swing.JLabel();
         manage_customers = new javax.swing.JLabel();
         manage_hotel = new javax.swing.JLabel();
         manage_rooms = new javax.swing.JLabel();
@@ -117,13 +117,13 @@ public class Staffs extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "staff_id", "hotel_id", "full_name", "role", "email"
+                "staff_id", "full_name", "role", "email"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -155,7 +155,7 @@ public class Staffs extends javax.swing.JFrame {
         jLabel5.setText("ROLE: ");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 0));
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setText("CLEAR FIELDS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class Staffs extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 430, 50));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 0));
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton2.setText("ADDED STAFF");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ public class Staffs extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 180, 50));
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 0));
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton3.setText("EDIT");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +185,7 @@ public class Staffs extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 0));
+        jButton4.setBackground(new java.awt.Color(204, 204, 204));
         jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton4.setText("DELETE");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -223,11 +223,16 @@ public class Staffs extends javax.swing.JFrame {
         jPanel21.setBackground(new java.awt.Color(51, 51, 0));
         jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel49.setFont(new java.awt.Font("Times New Roman", 1, 25)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
-        jLabel49.setText("Logout");
-        jPanel21.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 40, 145, 42));
+        jLabel29.setFont(new java.awt.Font("Times New Roman", 1, 25)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
+        jLabel29.setText("Logout");
+        jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel29MouseClicked(evt);
+            }
+        });
+        jPanel21.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 40, 145, 42));
 
         getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 1420, 120));
 
@@ -245,13 +250,13 @@ public class Staffs extends javax.swing.JFrame {
         jLabel9.setText("S");
         jPanel12.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel8.setText("ESERVATION");
-        jPanel12.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel12.setText("ESERVATION");
+        jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
-        jLabel12.setText("R");
-        jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        jLabel13.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
+        jLabel13.setText("R");
+        jPanel12.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
         jLabel19.setText("H");
@@ -264,38 +269,43 @@ public class Staffs extends javax.swing.JFrame {
         jLabel27.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Downloads\\Orange___Green_Cool_Pineapple_Tropical_Drink_Logo_-removebg-preview__1_-removebg-preview.png")); // NOI18N
         jPanel12.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 10, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel13.setText("RAVELLERS");
-        jPanel12.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel14.setText("RAVELLERS");
+        jPanel12.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
-        jLabel14.setText("I");
-        jPanel12.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, -1));
+        jLabel15.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
+        jLabel15.setText("I");
+        jPanel12.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel15.setText("NN");
-        jPanel12.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel16.setText("NN");
+        jPanel12.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
-        jLabel16.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
-        jLabel16.setText("T");
-        jPanel12.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
+        jLabel17.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
+        jLabel17.setText("T");
+        jPanel12.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel17.setText("INEAPPLE ");
-        jPanel12.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel18.setText("INEAPPLE ");
+        jPanel12.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
-        jLabel18.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
-        jLabel18.setText("P");
-        jPanel12.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
+        jLabel28.setFont(new java.awt.Font("Georgia", 1, 48)); // NOI18N
+        jLabel28.setText("P");
+        jPanel12.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
 
         jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 120));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 0));
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 50)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(112, 126, 199));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dashboard.png"))); // NOI18N
-        jLabel11.setText("DASHBOARD");
+        dashboard.setFont(new java.awt.Font("Times New Roman", 1, 50)); // NOI18N
+        dashboard.setForeground(new java.awt.Color(112, 126, 199));
+        dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dashboard.png"))); // NOI18N
+        dashboard.setText("DASHBOARD");
+        dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -303,14 +313,14 @@ public class Staffs extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(jLabel11)
+                .addComponent(dashboard)
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
+                .addComponent(dashboard)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -514,20 +524,20 @@ public class Staffs extends javax.swing.JFrame {
 
         jPanel11.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
 
-        jPanel10.setBackground(new java.awt.Color(204, 255, 0));
+        jPanel10.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, -1, -1));
+        jPanel11.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 690, 510, 50));
 
         getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 1110));
 
@@ -575,6 +585,7 @@ public class Staffs extends javax.swing.JFrame {
         Customer customerForm = new Customer();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_customersMouseClicked
 
     private void manage_customersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_customersMouseEntered
@@ -587,9 +598,10 @@ public class Staffs extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_customersMouseExited
 
     private void manage_hotelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_hotelMouseClicked
-        Customer customerForm = new Customer();
-        customerForm.setVisible(true);
-        customerForm.setLocationRelativeTo(this);
+        Hotel hotel = new Hotel();
+        hotel.setVisible(true);
+        hotel.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_hotelMouseClicked
 
     private void manage_hotelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_hotelMouseEntered
@@ -602,9 +614,10 @@ public class Staffs extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_hotelMouseExited
 
     private void manage_roomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_roomsMouseClicked
-        Customer customerForm = new Customer();
-        customerForm.setVisible(true);
-        customerForm.setLocationRelativeTo(this);
+        Room roomsForm = new Room();
+        roomsForm.setVisible(true);
+        roomsForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_roomsMouseClicked
 
     private void manage_roomsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_roomsMouseEntered
@@ -617,9 +630,10 @@ public class Staffs extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_roomsMouseExited
 
     private void manage_reservationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_reservationsMouseClicked
-        Customer customerForm = new Customer();
+        Add_Reservations customerForm = new Add_Reservations();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_reservationsMouseClicked
 
     private void manage_reservationsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_reservationsMouseEntered
@@ -632,9 +646,10 @@ public class Staffs extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_reservationsMouseExited
 
     private void manage_paymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_paymentsMouseClicked
-        Customer customerForm = new Customer();
+        Payment customerForm = new Payment();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_manage_paymentsMouseClicked
 
     private void manage_paymentsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_paymentsMouseEntered
@@ -647,18 +662,18 @@ public class Staffs extends javax.swing.JFrame {
     }//GEN-LAST:event_manage_paymentsMouseExited
 
     private void staffsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffsMouseClicked
-        Customer customerForm = new Customer();
+        Staffs customerForm = new Staffs();
         customerForm.setVisible(true);
         customerForm.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_staffsMouseClicked
 
     private void staffsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffsMouseEntered
-        staffs.setBackground(new java.awt.Color(204, 204, 102));
-        staffs.setOpaque(true);
+
     }//GEN-LAST:event_staffsMouseEntered
 
     private void staffsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffsMouseExited
-        staffs.setBackground(new java.awt.Color(192, 255, 0));
+
     }//GEN-LAST:event_staffsMouseExited
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -672,6 +687,26 @@ public class Staffs extends javax.swing.JFrame {
     private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel5MouseExited
+
+    private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this,
+            "Are you sure you want to logout?",
+            "Logout Confirmation",
+            JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            Login login = new Login();
+            login.setVisible(true);
+            login.setLocationRelativeTo(this);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel29MouseClicked
+
+    private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
+        Dashboard customerForm = new Dashboard();
+        customerForm.setVisible(true);
+        customerForm.setLocationRelativeTo(this);
+    }//GEN-LAST:event_dashboardMouseClicked
 
     /**
      * @param args the command line arguments
@@ -709,6 +744,7 @@ public class Staffs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dashboard;
     private javax.swing.JTextField email_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -716,7 +752,6 @@ public class Staffs extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -734,13 +769,13 @@ public class Staffs extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
