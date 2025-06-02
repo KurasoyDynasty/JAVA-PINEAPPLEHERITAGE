@@ -7,6 +7,7 @@
 package VIEWER;
 import MODEL.my_methods;
 import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -45,7 +46,7 @@ public class Add_Reservations extends javax.swing.JFrame {
         TABLE_AR = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        total_amount = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -54,9 +55,10 @@ public class Add_Reservations extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jCalendarComboBox2 = new de.wannawork.jcalendar.JCalendarComboBox();
-        jCalendarComboBox3 = new de.wannawork.jcalendar.JCalendarComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
+        checkout_date = new de.wannawork.jcalendar.JCalendarComboBox();
+        checkin_date = new de.wannawork.jcalendar.JCalendarComboBox();
+        statusCombo = new javax.swing.JComboBox();
+        txtAmount = new javax.swing.JTextField();
         jPanel21 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -152,17 +154,17 @@ public class Add_Reservations extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, 50));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
-        jLabel3.setText("Total Amount:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 360, -1));
+        total_amount.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
+        total_amount.setText("TOTAL AMOUNT:");
+        jPanel2.add(total_amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 140, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel4.setText("CHECK-IN:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
-        jLabel5.setText("Check-Out:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
+        jLabel5.setText("CHECK-OUT:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -176,13 +178,13 @@ public class Add_Reservations extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setText("ADD CUSTOMER");
+        jButton2.setText("RESERVATIONS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 160, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 180, 50));
 
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -192,7 +194,7 @@ public class Add_Reservations extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 520, 120, 50));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 120, 50));
 
         jButton4.setBackground(new java.awt.Color(255, 0, 0));
         jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -202,7 +204,7 @@ public class Add_Reservations extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, 150, 50));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, 150, 50));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -220,13 +222,14 @@ public class Add_Reservations extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 390, 50));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
-        jLabel10.setText("Status:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
-        jPanel2.add(jCalendarComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 260, 30));
-        jPanel2.add(jCalendarComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 260, 30));
+        jLabel10.setText("STATUS:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
+        jPanel2.add(checkout_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 260, 30));
+        jPanel2.add(checkin_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 260, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "active", "inactive", "pending" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 260, 30));
+        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "active", "inactive", "pending" }));
+        jPanel2.add(statusCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 260, 30));
+        jPanel2.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 412, 260, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 1420, 820));
 
@@ -578,7 +581,27 @@ public class Add_Reservations extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
+        String checkIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(checkin_date.getDate());
+        String checkOut = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(checkout_date.getDate());
+        String amountRaw = txtAmount.getText().replace(",", "");
+        String status = statusCombo.getSelectedItem().toString();
+
+        if (checkIn.isEmpty() || checkOut.isEmpty() || amountRaw.isEmpty() || status.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+
+        double totalAmount = Double.parseDouble(amountRaw);
+
+        b.Chony("INSERT INTO tbl_reservations (check_in, check_out, total_amount, status, created_at) " +
+        "VALUES ('" + checkIn + "', '" + checkOut + "', '" + totalAmount + "', '" + status + "', curdate())");
+        b.DisplayTable(TABLE_AR, "SELECT reservations_id, check_in, check_out, total_amount, status, created_at FROM tbl_reservations");
+
+        checkin_date.setDate(null);
+        checkout_date.setDate(null);
+        txtAmount.setText("");
+        statusCombo.setSelectedIndex(0);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void manage_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_customersMouseClicked
@@ -754,13 +777,12 @@ public class Add_Reservations extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TABLE_AR;
+    private de.wannawork.jcalendar.JCalendarComboBox checkin_date;
+    private de.wannawork.jcalendar.JCalendarComboBox checkout_date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBox2;
-    private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBox3;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -783,7 +805,6 @@ public class Add_Reservations extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel52;
@@ -813,5 +834,8 @@ public class Add_Reservations extends javax.swing.JFrame {
     private javax.swing.JLabel manage_reservations;
     private javax.swing.JLabel manage_rooms;
     private javax.swing.JLabel staffs;
+    private javax.swing.JComboBox statusCombo;
+    private javax.swing.JLabel total_amount;
+    private javax.swing.JTextField txtAmount;
     // End of variables declaration//GEN-END:variables
 }

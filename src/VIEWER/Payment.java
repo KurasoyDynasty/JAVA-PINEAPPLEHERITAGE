@@ -21,7 +21,7 @@ public class Payment extends javax.swing.JFrame {
     public Payment() {
         initComponents();
          setLocationRelativeTo(null);
-         b.DisplayTable(PAYMENTS, "SELECT * FROM tbl_payment");
+         b.DisplayTable(PAYMENTS, "SELECT payment_id, payment_method, payment_date, amount_paid FROM tbl_payment");
     }
     
     my_methods b = new my_methods();
@@ -54,6 +54,7 @@ public class Payment extends javax.swing.JFrame {
         payment_method = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         payment_date = new de.wannawork.jcalendar.JCalendarComboBox();
+        amount_paid = new javax.swing.JTextField();
         jPanel21 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -212,7 +213,8 @@ public class Payment extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Microsoft Himalaya", 1, 40)); // NOI18N
         jLabel7.setText("SEARCH: ");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 310, 90));
-        jPanel2.add(payment_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 230, 30));
+        jPanel2.add(payment_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 240, 30));
+        jPanel2.add(amount_paid, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 332, 240, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 1420, 780));
 
@@ -546,17 +548,19 @@ public class Payment extends javax.swing.JFrame {
         // TODO add your handling code here:
         String pm = payment_method.getSelectedItem().toString();
         String pd = new SimpleDateFormat("yyyy-MM-dd").format(payment_date.getDate());
-        if (pm.isEmpty() || pd.isEmpty()) {
+        String ap = amount_paid.getText();
+        if (pm.isEmpty() || pd.isEmpty() || ap.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please fill in all fields.");
         return;
     }
-        b.Chony("insert into tbl_rooms (payment_id, reservations_id, payment_method, payment_date, amount_paid) " +
-        "values (null, 1, '"+pm+"', '"+pd+"', now())");
+        b.Chony("INSERT INTO tbl_payment (payment_id, payment_method, payment_date, amount_paid) " +
+        "VALUES (null, '"+pm+"', '"+pd+"', '"+ap+"')");
         
-        b.DisplayTable(PAYMENTS, "SELECT * FROM tbl_payment");
+        b.DisplayTable(PAYMENTS, "SELECT payment_id, payment_method, payment_date, amount_paid FROM tbl_payment");
 
         payment_method.setSelectedIndex(0);
         payment_date.setDate(null);
+        amount_paid.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void manage_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manage_customersMouseClicked
@@ -723,6 +727,7 @@ public class Payment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PAYMENTS;
+    private javax.swing.JTextField amount_paid;
     private javax.swing.JLabel dashboard;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
