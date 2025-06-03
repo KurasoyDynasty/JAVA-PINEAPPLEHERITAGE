@@ -12,7 +12,9 @@ package VIEWER;
  */
 import MODEL.my_methods;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 public class Room extends javax.swing.JFrame {
 
     /**
@@ -41,15 +43,15 @@ public class Room extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ROOMS = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        search_rooms = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update_room = new javax.swing.JButton();
+        delete_rooms = new javax.swing.JButton();
         pax = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         room_number = new javax.swing.JComboBox();
@@ -129,13 +131,17 @@ public class Room extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 118, 920, 640));
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_rooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_roomsActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 337, 30));
+        search_rooms.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_roomsKeyReleased(evt);
+            }
+        });
+        jPanel2.add(search_rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 337, 30));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
@@ -173,25 +179,25 @@ public class Room extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 180, 50));
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 255));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update_room.setBackground(new java.awt.Color(0, 204, 255));
+        update_room.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        update_room.setText("EDIT");
+        update_room.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                update_roomActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
+        jPanel2.add(update_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
 
-        jButton4.setBackground(new java.awt.Color(0, 204, 255));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delete_rooms.setBackground(new java.awt.Color(0, 204, 255));
+        delete_rooms.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        delete_rooms.setText("DELETE");
+        delete_rooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delete_roomsActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
+        jPanel2.add(delete_rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
 
         pax.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single (1 Pax)", "Double (2 Pax)", "Triple (3 Pax)", "Quad (4 Pax)", "Family (5–6 Pax)", "Barkada (7–8 PAx)", "Group (9+ Pax)" }));
         pax.addActionListener(new java.awt.event.ActionListener() {
@@ -216,14 +222,14 @@ public class Room extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 390, 50));
 
-        room_number.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 person", "2 persons", "3 persons", "4 persons", "5 persons", "6 persons", "7 persons ", "8 persons", "9 persons", "10 persons" }));
+        room_number.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "room 101", "room 102", "room 103", "room 104", "room 105", "room 108", "room 109", "room 110", "room 201", "room 202", "room 203", "room 204", "room 205", "room 206", "room 207", "room 208", "room 209", "room 210" }));
         jPanel2.add(room_number, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 240, 30));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Himalaya", 1, 40)); // NOI18N
         jLabel7.setText("SEARCH: ");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 310, 90));
 
-        room_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Deluxe Room", "Superior Room", "ExecutiVE Suite", "Family Room", "Standard Room", "Presidential Suite", "Single Room" }));
+        room_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Deluxe Room", "Superior Room", "Executive Suite", "Family Room", "Standard Room", "Presidential Suite", "Single Room" }));
         jPanel2.add(room_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 240, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 1410, 790));
@@ -553,21 +559,63 @@ public class Room extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_roomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_roomsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_search_roomsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void update_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_roomActionPerformed
+        int row = ROOMS.getSelectedRow();
+if (row == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a room to update.");
+    return;
+}
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+DefaultTableModel model = (DefaultTableModel) ROOMS.getModel();
+int roomId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+String roomNumber = room_number.getSelectedItem().toString();
+String roomType = room_type.getSelectedItem().toString();
+String paxValue = pax.getSelectedItem().toString();
+
+if (roomNumber.isEmpty() || roomType.isEmpty() || paxValue.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+    return;
+}
+
+b.Chony("UPDATE tbl_rooms SET room_number = '" + roomNumber + 
+        "', room_type = '" + roomType + "', pax = '" + paxValue + "' WHERE room_id = " + roomId);
+
+b.DisplayTable(ROOMS, "SELECT * FROM tbl_rooms");
+
+JOptionPane.showMessageDialog(this, "Room updated successfully.");
+
+room_number.setSelectedIndex(0);
+room_type.setSelectedIndex(0);
+pax.setSelectedIndex(0);
+
+    }//GEN-LAST:event_update_roomActionPerformed
+
+    private void delete_roomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_roomsActionPerformed
+        int row = ROOMS.getSelectedRow();
+        if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a room to delete.");
+        return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) ROOMS.getModel();
+        int roomId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this room?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            b.Chony("DELETE FROM tbl_rooms WHERE room_id = " + roomId);
+            model.removeRow(row);
+            JOptionPane.showMessageDialog(this, "Room deleted successfully.");
+    }
+    }//GEN-LAST:event_delete_roomsActionPerformed
 
     private void paxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paxActionPerformed
         // TODO add your handling code here:
@@ -719,6 +767,14 @@ public class Room extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_dashboardMouseClicked
 
+    private void search_roomsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_roomsKeyReleased
+        String search = search_rooms.getText();
+        DefaultTableModel model = (DefaultTableModel) ROOMS.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        ROOMS.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_search_roomsKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -757,10 +813,9 @@ public class Room extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ROOMS;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JButton delete_rooms;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -802,7 +857,6 @@ public class Room extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel manage_customers;
     private javax.swing.JLabel manage_hotel;
     private javax.swing.JLabel manage_payments;
@@ -811,6 +865,8 @@ public class Room extends javax.swing.JFrame {
     private javax.swing.JComboBox pax;
     private javax.swing.JComboBox room_number;
     private javax.swing.JComboBox room_type;
+    private javax.swing.JTextField search_rooms;
     private javax.swing.JLabel staffs;
+    private javax.swing.JButton update_room;
     // End of variables declaration//GEN-END:variables
 }

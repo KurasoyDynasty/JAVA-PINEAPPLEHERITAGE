@@ -13,6 +13,9 @@ package VIEWER;
 import MODEL.my_methods;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 public class Payment extends javax.swing.JFrame {
 
     /**
@@ -41,15 +44,15 @@ public class Payment extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         PAYMENTS = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        search_payment = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update_payment = new javax.swing.JButton();
+        delete_payments = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         payment_method = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
@@ -128,13 +131,17 @@ public class Payment extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 118, 930, 640));
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_paymentActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 337, 30));
+        search_payment.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_paymentKeyReleased(evt);
+            }
+        });
+        jPanel2.add(search_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 337, 30));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
@@ -172,25 +179,25 @@ public class Payment extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 180, 50));
 
-        jButton3.setBackground(new java.awt.Color(204, 0, 204));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update_payment.setBackground(new java.awt.Color(204, 0, 204));
+        update_payment.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        update_payment.setText("EDIT");
+        update_payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                update_paymentActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
+        jPanel2.add(update_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
 
-        jButton4.setBackground(new java.awt.Color(204, 0, 204));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delete_payments.setBackground(new java.awt.Color(204, 0, 204));
+        delete_payments.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        delete_payments.setText("DELETE");
+        delete_payments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delete_paymentsActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
+        jPanel2.add(delete_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -528,21 +535,72 @@ public class Payment extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_paymentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_search_paymentActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void update_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_paymentActionPerformed
+        int row = PAYMENTS.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a payment to update.");
+        return;
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    DefaultTableModel model = (DefaultTableModel) PAYMENTS.getModel();
+    int paymentId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+    String paymentMethod = payment_method.getSelectedItem().toString();
+    String paymentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payment_date.getDate());
+    String amountRaw = amount_paid.getText().replace(",", "");
+    
+    if (paymentMethod.isEmpty() || paymentDate.isEmpty() || amountRaw.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
+    }
+
+    double amountPaid;
+    try {
+        amountPaid = Double.parseDouble(amountRaw);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid amount format.");
+        return;
+    }
+
+    b.Chony("UPDATE tbl_payment SET payment_method = '" + paymentMethod + 
+            "', payment_date = '" + paymentDate + 
+            "', amount_paid = " + amountPaid + 
+            " WHERE payment_id = " + paymentId);
+
+    b.DisplayTable(PAYMENTS, "SELECT payment_id, payment_method, payment_date, amount_paid FROM tbl_payment");
+
+    JOptionPane.showMessageDialog(this, "Payment updated successfully.");
+
+    payment_method.setSelectedIndex(0);
+    payment_date.setDate(null);
+    amount_paid.setText("");
+    }//GEN-LAST:event_update_paymentActionPerformed
+
+    private void delete_paymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_paymentsActionPerformed
+        int row = PAYMENTS.getSelectedRow();
+        if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a payment to delete.");
+        return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) PAYMENTS.getModel();
+        int paymentId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this payment?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+           b.Chony("DELETE FROM tbl_payment WHERE payment_id = " + paymentId);
+           model.removeRow(row);
+           JOptionPane.showMessageDialog(this, "Payment deleted successfully.");
+    }
+    }//GEN-LAST:event_delete_paymentsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -690,6 +748,14 @@ public class Payment extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_dashboardMouseClicked
 
+    private void search_paymentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_paymentKeyReleased
+        String search = search_payment.getText();
+        DefaultTableModel model = (DefaultTableModel) PAYMENTS.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        PAYMENTS.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_search_paymentKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -729,10 +795,9 @@ public class Payment extends javax.swing.JFrame {
     private javax.swing.JTable PAYMENTS;
     private javax.swing.JTextField amount_paid;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JButton delete_payments;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -773,7 +838,6 @@ public class Payment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel manage_customers;
     private javax.swing.JLabel manage_hotel;
     private javax.swing.JLabel manage_payments;
@@ -781,6 +845,8 @@ public class Payment extends javax.swing.JFrame {
     private javax.swing.JLabel manage_rooms;
     private de.wannawork.jcalendar.JCalendarComboBox payment_date;
     private javax.swing.JComboBox payment_method;
+    private javax.swing.JTextField search_payment;
     private javax.swing.JLabel staffs;
+    private javax.swing.JButton update_payment;
     // End of variables declaration//GEN-END:variables
 }

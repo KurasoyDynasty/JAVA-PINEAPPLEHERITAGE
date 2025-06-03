@@ -8,6 +8,9 @@ package VIEWER;
 
 import MODEL.my_methods;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -41,7 +44,7 @@ public class Hotel extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        search_hotel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         textphone = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -49,8 +52,8 @@ public class Hotel extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update_hotel = new javax.swing.JButton();
+        delete_hotel = new javax.swing.JButton();
         location1 = new javax.swing.JComboBox();
         hotel_brands = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
@@ -130,13 +133,17 @@ public class Hotel extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 118, 920, 650));
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_hotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_hotelActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, 337, 30));
+        search_hotel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_hotelKeyReleased(evt);
+            }
+        });
+        jPanel2.add(search_hotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, 337, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, -1, 50));
@@ -174,25 +181,25 @@ public class Hotel extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 190, 50));
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 0));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update_hotel.setBackground(new java.awt.Color(255, 153, 0));
+        update_hotel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        update_hotel.setText("EDIT");
+        update_hotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                update_hotelActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 90, 50));
+        jPanel2.add(update_hotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 90, 50));
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 0));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delete_hotel.setBackground(new java.awt.Color(255, 153, 0));
+        delete_hotel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        delete_hotel.setText("DELETE");
+        delete_hotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delete_hotelActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
+        jPanel2.add(delete_hotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
 
         location1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bukidnon", "Misamis Oriental", "Davao del Sur", "Bukidnon", "South Cotabato", "Bohol", "Ilocos Sur" }));
         jPanel2.add(location1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 260, 30));
@@ -546,21 +553,60 @@ public class Hotel extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_hotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_hotelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_search_hotelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void update_hotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_hotelActionPerformed
+        int row = jTable1.getSelectedRow();
+if (row == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a hotel to update.");
+    return;
+}
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+int hotelId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+String hotelName = hotel_brands.getSelectedItem().toString();
+String location = location1.getSelectedItem().toString();
+String contactNumber = textphone.getText();
+
+if (hotelName.isEmpty() || location.isEmpty() || contactNumber.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+    return;
+}
+
+b.Chony("UPDATE tbl_hotel SET hotel_name = '" + hotelName + "', location = '" + location + "', contact_number = '" + contactNumber + "' WHERE hotel_id = " + hotelId);
+b.DisplayTable(jTable1, "SELECT * FROM tbl_hotel");
+
+JOptionPane.showMessageDialog(this, "Hotel updated successfully.");
+
+textphone.setText("");
+hotel_brands.setSelectedIndex(0);
+location1.setSelectedIndex(0);
+    }//GEN-LAST:event_update_hotelActionPerformed
+
+    private void delete_hotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_hotelActionPerformed
+        int row = jTable1.getSelectedRow();
+        if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a hotel to delete.");
+        return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int hotelId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this hotel?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            b.Chony("DELETE FROM tbl_hotel WHERE hotel_id = " + hotelId);
+            model.removeRow(row);
+            JOptionPane.showMessageDialog(this, "Hotel deleted successfully.");
+    }
+    }//GEN-LAST:event_delete_hotelActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String hotelName = hotel_brands.getSelectedItem().toString();
@@ -706,6 +752,14 @@ public class Hotel extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_dashboardMouseClicked
 
+    private void search_hotelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_hotelKeyReleased
+        String search = search_hotel.getText();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        jTable1.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_search_hotelKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -743,11 +797,10 @@ public class Hotel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dashboard;
+    private javax.swing.JButton delete_hotel;
     private javax.swing.JComboBox hotel_brands;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -790,14 +843,15 @@ public class Hotel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox location1;
     private javax.swing.JLabel manage_customers;
     private javax.swing.JLabel manage_hotel;
     private javax.swing.JLabel manage_payments;
     private javax.swing.JLabel manage_reservations;
     private javax.swing.JLabel manage_rooms;
+    private javax.swing.JTextField search_hotel;
     private javax.swing.JLabel staffs;
     private javax.swing.JTextField textphone;
+    private javax.swing.JButton update_hotel;
     // End of variables declaration//GEN-END:variables
 }

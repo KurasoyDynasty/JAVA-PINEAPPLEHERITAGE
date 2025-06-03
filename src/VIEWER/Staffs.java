@@ -12,6 +12,9 @@ package VIEWER;
  */
 import MODEL.my_methods;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 public class Staffs extends javax.swing.JFrame {
 
     /**
@@ -40,7 +43,7 @@ public class Staffs extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        search_staff = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         email_txt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -48,8 +51,8 @@ public class Staffs extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update_staffs = new javax.swing.JButton();
+        delete_staffs = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         role_combobox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
@@ -130,13 +133,17 @@ public class Staffs extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 920, 660));
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_staff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_staffActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, 337, 30));
+        search_staff.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_staffKeyReleased(evt);
+            }
+        });
+        jPanel2.add(search_staff, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, 337, 30));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
@@ -175,25 +182,25 @@ public class Staffs extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 180, 50));
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update_staffs.setBackground(new java.awt.Color(204, 204, 204));
+        update_staffs.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        update_staffs.setText("EDIT");
+        update_staffs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                update_staffsActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
+        jPanel2.add(update_staffs, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 100, 50));
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delete_staffs.setBackground(new java.awt.Color(204, 204, 204));
+        delete_staffs.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        delete_staffs.setText("DELETE");
+        delete_staffs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delete_staffsActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
+        jPanel2.add(delete_staffs, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 130, 50));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -545,21 +552,64 @@ public class Staffs extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_staffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_staffActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_search_staffActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void update_staffsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_staffsActionPerformed
+        int row = jTable1.getSelectedRow();
+if (row == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a staff to update.");
+    return;
+}
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+int staffId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+String fullName = staffname_txt.getText();
+String role = role_combobox.getSelectedItem().toString();
+String email = email_txt.getText();
+
+if (fullName.isEmpty() || role.isEmpty() || email.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+    return;
+}
+
+b.Chony("UPDATE tbl_staff SET full_name = '" + fullName + 
+        "', role = '" + role + 
+        "', email = '" + email + 
+        "' WHERE staff_id = " + staffId);
+
+b.DisplayTable(jTable1, "SELECT staff_id, full_name, role, email FROM tbl_staff");
+
+JOptionPane.showMessageDialog(this, "Staff updated successfully.");
+
+staffname_txt.setText("");
+role_combobox.setSelectedIndex(0);
+email_txt.setText("");
+    }//GEN-LAST:event_update_staffsActionPerformed
+
+    private void delete_staffsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_staffsActionPerformed
+        int row = jTable1.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a staff to delete.");
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    int staffId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+    int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this staff?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+    if (confirm == JOptionPane.YES_OPTION) {
+        b.Chony("DELETE FROM tbl_staff WHERE staff_id = " + staffId);
+        model.removeRow(row);
+        JOptionPane.showMessageDialog(this, "Staff deleted successfully.");
+    }
+    }//GEN-LAST:event_delete_staffsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String staffName = staffname_txt.getText();
@@ -708,6 +758,14 @@ public class Staffs extends javax.swing.JFrame {
         customerForm.setLocationRelativeTo(this);
     }//GEN-LAST:event_dashboardMouseClicked
 
+    private void search_staffKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_staffKeyReleased
+        String search = search_staff.getText();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        jTable1.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_search_staffKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -745,11 +803,10 @@ public class Staffs extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dashboard;
+    private javax.swing.JButton delete_staffs;
     private javax.swing.JTextField email_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -792,14 +849,15 @@ public class Staffs extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel manage_customers;
     private javax.swing.JLabel manage_hotel;
     private javax.swing.JLabel manage_payments;
     private javax.swing.JLabel manage_reservations;
     private javax.swing.JLabel manage_rooms;
     private javax.swing.JComboBox role_combobox;
+    private javax.swing.JTextField search_staff;
     private javax.swing.JTextField staffname_txt;
     private javax.swing.JLabel staffs;
+    private javax.swing.JButton update_staffs;
     // End of variables declaration//GEN-END:variables
 }

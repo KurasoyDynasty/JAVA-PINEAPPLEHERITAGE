@@ -8,6 +8,9 @@ package VIEWER;
 import MODEL.my_methods;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -44,15 +47,15 @@ public class Add_Reservations extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE_AR = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        search_reservations = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         total_amount = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update_reservations = new javax.swing.JButton();
+        delete_reservations = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         checkout_date = new de.wannawork.jcalendar.JCalendarComboBox();
@@ -123,7 +126,7 @@ public class Add_Reservations extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/booking (1).png"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 1420, 80));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 1450, 80));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -143,13 +146,17 @@ public class Add_Reservations extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 108, 930, 650));
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        search_reservations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                search_reservationsActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 337, 30));
+        search_reservations.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_reservationsKeyReleased(evt);
+            }
+        });
+        jPanel2.add(search_reservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 337, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, 50));
@@ -186,25 +193,25 @@ public class Add_Reservations extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 180, 50));
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update_reservations.setBackground(new java.awt.Color(255, 0, 0));
+        update_reservations.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        update_reservations.setText("EDIT");
+        update_reservations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                update_reservationsActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 120, 50));
+        jPanel2.add(update_reservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 120, 50));
 
-        jButton4.setBackground(new java.awt.Color(255, 0, 0));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delete_reservations.setBackground(new java.awt.Color(255, 0, 0));
+        delete_reservations.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        delete_reservations.setText("DELETE");
+        delete_reservations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delete_reservationsActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, 150, 50));
+        jPanel2.add(delete_reservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, 150, 50));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -231,7 +238,7 @@ public class Add_Reservations extends javax.swing.JFrame {
         jPanel2.add(statusCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 260, 30));
         jPanel2.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 412, 260, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 1420, 820));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 1450, 820));
 
         jPanel21.setBackground(new java.awt.Color(51, 51, 0));
         jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -247,7 +254,7 @@ public class Add_Reservations extends javax.swing.JFrame {
         });
         jPanel21.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 40, 145, 42));
 
-        getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 1420, 120));
+        getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 1450, 120));
 
         jPanel11.setBackground(new java.awt.Color(204, 255, 0));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -564,21 +571,65 @@ public class Add_Reservations extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void search_reservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_reservationsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_search_reservationsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void update_reservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_reservationsActionPerformed
+        int row = TABLE_AR.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a reservation to update.");
+        return;
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    DefaultTableModel model = (DefaultTableModel) TABLE_AR.getModel();
+    int reservationId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+    String checkIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(checkin_date.getDate());
+    String checkOut = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(checkout_date.getDate());
+    String amountRaw = txtAmount.getText().replace(",", "");
+    String status = statusCombo.getSelectedItem().toString();
+
+    if (checkIn.isEmpty() || checkOut.isEmpty() || amountRaw.isEmpty() || status.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
+    }
+
+    double totalAmount = Double.parseDouble(amountRaw);
+
+    b.Chony("UPDATE tbl_reservations SET check_in = '" + checkIn + "', check_out = '" + checkOut + "', total_amount = '" + totalAmount + "', status = '" + status + "' WHERE reservations_id = " + reservationId);
+
+    b.DisplayTable(TABLE_AR, "SELECT reservations_id, check_in, check_out, total_amount, status, created_at FROM tbl_reservations");
+
+    JOptionPane.showMessageDialog(this, "Reservation updated successfully.");
+    
+    checkin_date.setDate(null);
+    checkout_date.setDate(null);
+    txtAmount.setText("");
+    statusCombo.setSelectedIndex(0);
+    }//GEN-LAST:event_update_reservationsActionPerformed
+
+    private void delete_reservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_reservationsActionPerformed
+        int row = TABLE_AR.getSelectedRow();
+        if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) TABLE_AR.getModel();
+        int reservationId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this reservation?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            b.Chony("DELETE FROM tbl_reservations WHERE reservations_id = " + reservationId);
+            model.removeRow(row);
+            JOptionPane.showMessageDialog(this, "Reservation deleted successfully.");
+    }
+    }//GEN-LAST:event_delete_reservationsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String checkIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(checkin_date.getDate());
@@ -740,6 +791,14 @@ public class Add_Reservations extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel11MouseExited
 
+    private void search_reservationsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_reservationsKeyReleased
+        String search = search_reservations.getText();
+        DefaultTableModel model = (DefaultTableModel) TABLE_AR.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        TABLE_AR.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));     
+    }//GEN-LAST:event_search_reservationsKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -779,10 +838,9 @@ public class Add_Reservations extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_AR;
     private de.wannawork.jcalendar.JCalendarComboBox checkin_date;
     private de.wannawork.jcalendar.JCalendarComboBox checkout_date;
+    private javax.swing.JButton delete_reservations;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -827,15 +885,16 @@ public class Add_Reservations extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel manage_customers;
     private javax.swing.JLabel manage_hotel;
     private javax.swing.JLabel manage_payments;
     private javax.swing.JLabel manage_reservations;
     private javax.swing.JLabel manage_rooms;
+    private javax.swing.JTextField search_reservations;
     private javax.swing.JLabel staffs;
     private javax.swing.JComboBox statusCombo;
     private javax.swing.JLabel total_amount;
     private javax.swing.JTextField txtAmount;
+    private javax.swing.JButton update_reservations;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,6 +12,9 @@ package VIEWER;
  */
 import MODEL.my_methods;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 public class Customer extends javax.swing.JFrame {
 
     /**
@@ -51,8 +54,8 @@ public class Customer extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update_customers = new javax.swing.JButton();
+        delete_customer = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
@@ -138,6 +141,11 @@ public class Customer extends javax.swing.JFrame {
                 SearchActionPerformed(evt);
             }
         });
+        Search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchKeyReleased(evt);
+            }
+        });
         jPanel2.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 337, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
@@ -178,25 +186,25 @@ public class Customer extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 190, 50));
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 0));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update_customers.setBackground(new java.awt.Color(0, 204, 0));
+        update_customers.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        update_customers.setText("EDIT");
+        update_customers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                update_customersActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 90, 50));
+        jPanel2.add(update_customers, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 90, 50));
 
-        jButton4.setBackground(new java.awt.Color(0, 204, 0));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        delete_customer.setBackground(new java.awt.Color(0, 204, 0));
+        delete_customer.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        delete_customer.setText("DELETE");
+        delete_customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                delete_customerActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 120, 50));
+        jPanel2.add(delete_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 120, 50));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -558,13 +566,52 @@ public class Customer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void update_customersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_customersActionPerformed
+        int row = table1.getSelectedRow();
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a customer to update.");
+        return;
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    DefaultTableModel model = (DefaultTableModel) table1.getModel();
+    int customerId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+    String fullName = txtName.getText();
+    String email = txtEmail.getText();
+    String phone = txtPhone.getText();
+
+    if (fullName.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
+    }
+
+    b.Chony("UPDATE tbl_customers SET full_name = '" + fullName + "', email = '" + email + "', phone = '" + phone + "' WHERE customer_id = " + customerId);
+    b.DisplayTable(table1, "SELECT * FROM tbl_customers");
+
+    JOptionPane.showMessageDialog(this, "Customer updated successfully.");
+
+    txtName.setText("");
+    txtEmail.setText("");
+    txtPhone.setText("");
+    }//GEN-LAST:event_update_customersActionPerformed
+
+    private void delete_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_customerActionPerformed
+        int row = table1.getSelectedRow();
+        if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a customer to delete.");
+        return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        int customerId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this customer?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+           b.Chony("DELETE FROM tbl_customers WHERE customer_id = " + customerId);
+           model.removeRow(row);
+           JOptionPane.showMessageDialog(this, "Customer deleted successfully.");
+    }
+    }//GEN-LAST:event_delete_customerActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String fullName = txtName.getText();
@@ -719,6 +766,14 @@ public class Customer extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel11MouseExited
 
+    private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
+        String search = Search.getText();
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        table1.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_SearchKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -756,10 +811,9 @@ public class Customer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Search;
+    private javax.swing.JButton delete_customer;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -813,5 +867,6 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
+    private javax.swing.JButton update_customers;
     // End of variables declaration//GEN-END:variables
 }
